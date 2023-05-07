@@ -1,11 +1,12 @@
-import { useDispatch } from 'react-redux';
-import { addEmployee } from '../../store/slices/employees/employeesSlice';
+import { useDispatch } from "react-redux";
+import { addEmployee } from "../../store/slices/employees/employeesSlice";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 // Components
-import FormEmployee from '../../components/FormEmployee';
-import Layout from '../../components/Layout';
+import ButtonLink from "../../components/common/ButtonLink";
+import FormEmployee from "../../components/common/form/FormEmployee";
+import Layout from "../../components/Layout";
 
 function NewEmployee() {
   const dispatch = useDispatch();
@@ -13,16 +14,22 @@ function NewEmployee() {
 
   const handleAddEmployee = (data) => {
     dispatch(addEmployee(data));
-    navigate('/employee');
+    navigate("/employee");
   }
+
+  const menuActions = [
+    <ButtonLink
+      href="/employee"
+      icon="◀"
+      text="atrás"
+      title="volver a empledos"
+    />
+  ];
 
   return (
     <Layout
-      href='/employee'
-      linkIcon='◀'
-      linkText='atras'
-      linkTitle='volver a empleados'
-      title='nuevo empleado'
+      menuActions={menuActions}
+      title="nuevo empleado"
     >
       <FormEmployee onCreate={handleAddEmployee} />
     </Layout>

@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+// import { useGetAllEmployeesQuery } from "../../api/employeesApi";
 
-const EMPLOYEE_BASE_URL = 'http://localhost:3001/employee';
+const EMPLOYEE_BASE_URL = 'http://localhost:3001/employees';
 
 export const fetchEmployees = createAsyncThunk('employees/fetch', async (page = 1) => {
   const response = await fetch(`${EMPLOYEE_BASE_URL}?page=${page}`);
+  // const response = await useGetAllEmployeesQuery.endpoints.getAllEmployees();
   const data = await response.json();
   return data;
 });
@@ -46,7 +48,7 @@ export const deleteEmployee = createAsyncThunk('employees/delete', async ({ id }
   return data;
 });
 
-export const employeeSlice = createSlice({
+export const employeeSliceExam = createSlice({
   name: 'employee',
   initialState: {
     entities: [],
@@ -101,6 +103,6 @@ export const employeeSlice = createSlice({
   },
 });
 
-export const { setSelectedEmployee, resetSelectedEmployee } = employeeSlice.actions;
+export const { setSelectedEmployee, resetSelectedEmployee, entities } = employeeSliceExam.actions;
 
-export default employeeSlice.reducer;
+export default employeeSliceExam.reducer;

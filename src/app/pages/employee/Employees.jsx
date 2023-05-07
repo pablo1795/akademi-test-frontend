@@ -1,12 +1,12 @@
-import { useGetAllEmployeesQuery } from '../../store/api/employeeApi';
+import { useGetAllEmployeesQuery } from "../../store/api/employeesApi";
 
 // Components
-import ButtonLink from '../../components/ButtonLink';
-import CreateTable from '../../components/common/CreateTable';
-import Layout from '../../components/Layout';
+import ButtonLink from "../../components/common/ButtonLink";
+import CreateTable from "../../components/common/table/CreateTable";
+import Layout from "../../components/Layout";
 
 function Employees() {
-  const { data: result = { mesagge: '', result: [] }/*, isError, error*/ } = useGetAllEmployeesQuery();
+  const { data: result = { mesagge: "", result: [] }/*, isError, error*/ } = useGetAllEmployeesQuery();
   const employees = result.result;
 
   const prepareRow = employees.map((value) => ([
@@ -14,30 +14,34 @@ function Employees() {
     value.first_name,
     value.last_name,
     value.team_id,
-    <div className='flex items-center justify-center'>
+    <div className="flex items-center justify-center">
       <ButtonLink
-        icon='📄'
         href={`/employee/${value._id}`}
-        title='abrir perfil'
-      >
-        información
-      </ButtonLink>
+        icon="📄"
+        text="información"
+        title="información"
+      />
     </div>,
   ]));
 
+  const menuActions = [
+    <ButtonLink
+      href="/employee/create_employee"
+      icon="➕"
+      text="nuevo"
+      title="nuevo empleado"
+    />
+  ];
+
   return (
     <Layout
-      className='flex flex-col gap-4'
-      href='/employee/create_employee'
-      linkIcon='➕'
-      linkText='nuevo'
-      linkTitle='nuevo empleado'
-      title='lista de empleados'
+      menuActions={menuActions}
+      title="lista de empleado"
     >
       <CreateTable
         bodyData={prepareRow}
-        headerData={['N° id', 'apellido/s', 'nombre/s', 'comisión', 'acciones']}
-        title='empleados'
+        headerData={["N° id", "apellido/s", "nombre/s", "comisión", "acciones"]}
+        title="empleados"
       />
     </Layout>
   );

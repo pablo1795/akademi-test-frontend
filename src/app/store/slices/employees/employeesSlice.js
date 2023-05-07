@@ -1,4 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+//@ts-check
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+const EMPLOYEE_BASE_URL = 'http://localhost:3001/employees';
 
 const initialEmployees = [
     {
@@ -45,10 +48,21 @@ const initialEmployees = [
     }
 ];
 
+export const fetchEmployees = createAsyncThunk('http://localhost:3001/employees', async (page = 1) => {
+    const response = await fetch(`http://localhost:3001/employees?page=${page}`);
+    // const response = await useGetAllEmployeesQuery.endpoints.getAllEmployees();
+    const data = await response.json();
+    console.log("respuesta");
+    console.log(data);
+    return initialEmployees;
+});
+
+
+
 export const employeesSlice = createSlice({
-    name: "employee",
+    name: "employees",
     initialState: {
-        employees: initialEmployees,
+        employees: fetchEmployees,
         error: null,
         isLoading: false,
         page: 0,

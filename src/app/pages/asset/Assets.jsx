@@ -1,44 +1,47 @@
-import { useGetAllAssetsQuery } from '../../store/api/assetApi';
+import { useGetAllAssetsQuery } from "../../store/api/assetApi";
 
 // Components
-import ButtonLink from '../../components/ButtonLink';
-import CreateTable from '../../components/common/CreateTable';
-import Layout from '../../components/Layout';
+import ButtonLink from "../../components/common/ButtonLink";
+import CreateTable from "../../components/common/table/CreateTable";
+import Layout from "../../components/Layout";
+
+const menuActions = [
+  <ButtonLink
+    href="/asset/create_asset"
+    icon="➕"
+    text="nuevo"
+    title="nuevo activo"
+  />
+];
 
 function Assets() {
-  const { data: result = { mesagge: '', result: [] }/*, isError, error*/ } = useGetAllAssetsQuery();
+  const { data: result = { mesagge: "", result: [] }/*, isError, error*/ } = useGetAllAssetsQuery();
   const asset = result.result;
 
   const prepareRow = asset.map((value) => ([
-    value._id,
     value.name,
     value.type,
     value.code,
     value.marca,
-    <div className='flex items-center justify-center'>
+    <div className="flex items-center justify-center">
       <ButtonLink
-        icon='📄'
         href={`/asset/${value._id}`}
-        title='informacion'
-      >
-        información
-      </ButtonLink>
+        icon="📄"
+        text="información"
+        title="informacion"
+      />
     </div>,
   ]));
 
   return (
     <Layout
-      className='flex flex-col gap-4'
-      href='/asset/create_asset'
-      linkIcon='➕'
-      linkText='nuevo'
-      linkTitle='nuevo activo'
-      title='lista de activos'
+      menuActions={menuActions}
+      title="lista de activos"
     >
       <CreateTable
         bodyData={prepareRow}
-        headerData={['N° id', 'nombre', 'tipo', 'codigo', 'marca', 'acciones']}
-        title='activos'
+        headerData={["nombre", "tipo", "codigo", "marca", "acciones"]}
+        title="activos"
       />
     </Layout>
   );

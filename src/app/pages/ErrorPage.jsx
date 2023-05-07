@@ -1,10 +1,11 @@
 // Components
-import Layout from '../components/Layout';
+import Layout from "../components/Layout";
+import Text from "../components/common/Text";
 
 function ErrorPage() {
   return (
-    <Layout title={'error 404 - pagina no encontrada'}>
-      <p>Error 404🤯. esta pagina no existe!</p>
+    <Layout title="error 404 - pagina no encontrada">
+      <Text text="error 404 - pagina no encontrada" />
     </Layout>
   );
 }

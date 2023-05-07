@@ -1,24 +1,24 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const employeeApi = createApi({
-    reducerPath: 'employeeApi',
+export const employeesApi = createApi({
+    reducerPath: 'employeesApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3001'
     }),
     endpoints: (builder) => ({
         getAllEmployees: builder.query({
-            query: (page = 1) => `/employee?page=${page}`,
+            query: (page = 1) => `/employees?page=${page}`,
             providesTags: ['Employee']
         }),
         getEmployeeById: builder.query({
-            query: (postId) => '/employee/' + postId,
+            query: (postId) => '/employees/' + postId,
             providesTags: ['Employee']
         }),
         createEmployee: builder.mutation({
             query: (employee) => ({
                 body: employee,
                 method: 'POST',
-                url: '/employee/create_employee',
+                url: '/employees/create_employee',
             }),
             invalidatesTags: ['Employee']
         }),
@@ -26,7 +26,7 @@ export const employeeApi = createApi({
             query: (employee) => ({
                 body: employee,
                 method: 'PUT',
-                url: `/employee/update_employee/${employee._id}`,
+                url: `/employees/update_employee/${employee._id}`,
             }),
             invalidatesTags: ['Employee']
         }),
@@ -34,7 +34,7 @@ export const employeeApi = createApi({
             query: ({id}) => ({
                 body: id,
                 method: 'DELETE',
-                url: `/employee/delete_employee/${id}`,
+                url: `/employees/delete_employee/${id}`,
             }),
             invalidatesTags: ['Employee']
         }),
@@ -47,4 +47,4 @@ export const {
     useCreateEmployeeMutation,
     useDeleteEmployeeMutation,
     useUpdateEmployeeMutation,
-} = employeeApi;
+} = employeesApi;

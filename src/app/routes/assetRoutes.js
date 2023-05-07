@@ -1,28 +1,28 @@
-import Assets from '../pages/asset/Assets';
-import InfoAsset from '../pages/asset/InfoAsset';
-import NewAsset from '../pages/asset/NewAsset';
-import EditAsset from '../pages/asset/EditAsset';
-import DeleteAsset from '../pages/asset/DeleteAsset';
+import Assets from "../pages/asset/Assets";
+import InfoAsset from "../pages/asset/InfoAsset";
+import NewAsset from "../pages/asset/NewAsset";
+import EditAsset from "../pages/asset/EditAsset";
+import DeleteAsset from "../pages/asset/DeleteAsset";
 
 const assetRoutes = [
   {
-    path: '/asset',
+    path: "/asset",
     element: <Assets />
   },
   {
-    path: '/asset/:id',
+    path: "/asset/:id",
     element: <InfoAsset />
   },
   {
-    path: '/asset/create_asset',
+    path: "/asset/create_asset",
     element: <NewAsset />
   },
   {
-    path: '/asset/update_asset/:id',
+    path: "/asset/update_asset/:id",
     element: <EditAsset />
   },
   {
-    path: '/asset/delete_asset/:id',
+    path: "/asset/delete_asset/:id",
     element: <DeleteAsset />
   }
 ];

@@ -1,29 +1,36 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useGetAssetByIdQuery } from '../../store/api/assetApi';
+import { useNavigate, useParams } from "react-router-dom";
+import { useGetAssetByIdQuery } from "../../store/api/assetApi";
 
 // Components
-import Layout from '../../components/Layout';
-import FormAsset from '../../components/FormAsset';
+import ButtonLink from "../../components/common/ButtonLink";
+import Layout from "../../components/Layout";
+import FormAsset from "../../components/common/form/FormAsset";
 
 function EditAsset() {
   const params = useParams();
 
-  const { data: result = { mesagge: '', result: [] } } = useGetAssetByIdQuery(params.id);
+  const { data: result = { mesagge: "", result: [] } } = useGetAssetByIdQuery(params.id);
   const assetToEdit = result.result;
 
   const navigate = useNavigate();
 
   const handleEditAsset = () => {
-    navigate('/asset');
+    navigate("/asset");
   }
+
+  const menuActions = [
+    <ButtonLink
+      href={`/asset/${params.id}`}
+      icon="◀"
+      text="atrás"
+      title="volver a empledos"
+    />
+  ];
 
   return (
     <Layout
-      href={`/asset/${params.id}`}
-      linkIcon='◀'
-      linkText='atras'
-      linkTitle='volver a activos'
-      title='editar activo'
+      menuActions={menuActions}
+      title="editar activo"
     >
       <FormAsset assetData={assetToEdit} onEdit={handleEditAsset} />
     </Layout>

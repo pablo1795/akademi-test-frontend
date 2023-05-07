@@ -1,30 +1,21 @@
-import ButtonLink from './ButtonLink';
-
 function Layout({
   children,
-  className = '',
-  href = '',
-  linkText = '',
-  linkTitle = '',
-  linkIcon,
-  title = 'titulo de pagina',
+  menuActions = [],
+  title = "titulo de pagina",
 }) {
   return (
-    <section className='bg-stone-100 border-2 border-stone-400 rounded-3xl p-4 flex flex-col gap-4'>
-      <header className='border-b border-stone-800 pb-2 flex justify-between items-center'>
-        <h3 className='text-3xl font-bold uppercase'>
+    <section className="w-3/4 flex flex-col gap-4">
+      <header className="border-b border-stone-300 pb-2 flex justify-between items-center">
+        <h3 className="text-stone-300 font-bold uppercase">
           {title}
         </h3>
 
         {
-          href && linkText &&
-          <ButtonLink href={href} title={linkTitle} icon={linkIcon}>
-            {linkText}
-          </ButtonLink>
+          menuActions.length > 0 && menuActions.map((action) => action)
         }
       </header>
 
-      <section className={className}>
+      <section>
         {children}
       </section>
     </section>

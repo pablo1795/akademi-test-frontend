@@ -1,12 +1,12 @@
-import Home from '../pages/Home';
+import Home from "../pages/Home";
 
 const homeRoutes = [
   {
-    path: '/',
+    path: "/",
     element: <Home />
   },
   {
-    path: '/home',
+    path: "/home",
     element: <Home />
   }
 ];

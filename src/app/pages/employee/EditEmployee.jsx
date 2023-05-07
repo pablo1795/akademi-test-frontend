@@ -1,29 +1,35 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useGetEmployeeByIdQuery } from '../../store/api/employeeApi';
+import { useNavigate, useParams } from "react-router-dom";
+import { useGetEmployeeByIdQuery } from "../../store/api/employeesApi";
 
 // Components
-import Layout from '../../components/Layout';
-import FormEmployee from '../../components/FormEmployee';
+import ButtonLink from "../../components/common/ButtonLink";
+import FormEmployee from "../../components/common/form/FormEmployee";
+import Layout from "../../components/Layout";
 
 function EditEmployee() {
+  const navigate = useNavigate();
   const params = useParams();
 
-  const { data: result = { mesagge: '', result: [] } } = useGetEmployeeByIdQuery(params.id);
+  const { data: result = { mesagge: "", result: [] } } = useGetEmployeeByIdQuery(params.id);
   const employeeToEdit = result.result;
 
-  const navigate = useNavigate();
-
   const handleEditEmployee = () => {
-    navigate('/employee');
+    navigate("/employee");
   }
+
+  const menuActions = [
+    <ButtonLink
+      href={`/employee/${params.id}`}
+      icon="◀"
+      text="atrás"
+      title="volver a empledos"
+    />
+  ];
 
   return (
     <Layout
-      href={`/employee/${params.id}`}
-      linkIcon='◀'
-      linkText='atras'
-      linkTitle='volver a empleados'
-      title='editar empleado'
+      menuActions={menuActions}
+      title="editar empleado"
     >
       <FormEmployee employeeData={employeeToEdit} onEdit={handleEditEmployee} />
     </Layout>
